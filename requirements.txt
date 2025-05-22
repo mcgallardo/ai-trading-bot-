@@ -2,3 +2,4 @@ krakenex
 ccxt
 python-dotenv
 requests
+pykrakenapi
