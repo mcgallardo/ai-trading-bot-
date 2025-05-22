@@ -16,6 +16,32 @@ k = KrakenAPI(api)
 PAIR = 'ETHUSD'
 USD_TO_TRADE = 5.00
 PROFIT_THRESHOLD = 1.01  # Sell when price goes up 1%
+def trade():
+    global last_buy_price
+    current_price = get_current_price()
+
+    if last_buy_price is None:
+        # Buy ETH
+        response = k.add_standard_order(
+            pair=PAIR,
+            type='buy',
+            ordertype='market',
+            volume=str(round(USD_TO_TRADE / current_price, 6))
+        )
+        print("Buy order placed:", response)
+        last_buy_price = current_price
+
+    elif current_price >= last_buy_price * PROFIT_THRESHOLD:
+        # Sell ETH
+        eth_to_sell = USD_TO_TRADE / last_buy_price
+        response = k.add_standard_order(
+            pair=PAIR,
+            type='sell',
+            ordertype='market',
+            volume=str(round(eth_to_sell, 6))
+        )
+        print("Sell order placed:", response)
+        last_buy_price = None
 print("Bot started.")
 print(f"Pair: {PAIR}")
 print(f"USD to trade: {USD_TO_TRADE}")
