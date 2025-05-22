@@ -15,7 +15,7 @@ k = KrakenAPI(api)
 
 # Config
 PAIR = 'ETHUSD'
-USD_TO_TRADE = 5.00
+USD_TO_TRADE = 15.00
 PROFIT_THRESHOLD = 1.01  # 1% gain triggers sell
 
 # State tracking
