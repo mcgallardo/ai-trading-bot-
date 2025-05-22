@@ -16,6 +16,10 @@ k = KrakenAPI(api)
 PAIR = 'ETHUSD'
 USD_TO_TRADE = 5.00
 PROFIT_THRESHOLD = 1.01  # Sell when price goes up 1%
+print("Bot started.")
+print(f"Pair: {PAIR}")
+print(f"USD to trade: {USD_TO_TRADE}")
+print(f"Profit threshold: {PROFIT_THRESHOLD}")
 
 # TRACKING
 last_buy_price = None
@@ -24,6 +28,7 @@ def get_current_price():
     try:
         ticker = api.query_public('Ticker', {'pair': PAIR})
         price = float(ticker['result'][list(ticker['result'].keys())[0]]['c'][0])
+        print(f"Current market price: {price}")
         return price
     except Exception as e:
         print("Price fetch error:", e)
